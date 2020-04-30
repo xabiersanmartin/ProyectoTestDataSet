@@ -20,7 +20,5 @@ namespace CapaAcceso
         {
             return nuevoAcceso.DevolverTestsCategoria(categoria);
         }
-        fffffffff
-
     }
 }
