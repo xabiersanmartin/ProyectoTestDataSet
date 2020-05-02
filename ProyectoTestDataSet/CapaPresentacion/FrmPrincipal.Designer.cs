@@ -32,12 +32,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.cboTestCategorias = new System.Windows.Forms.ComboBox();
+            this.grbPreguntas = new System.Windows.Forms.GroupBox();
+            this.btnHacerTest = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // cboCategorias
             // 
             this.cboCategorias.FormattingEnabled = true;
-            this.cboCategorias.Location = new System.Drawing.Point(136, 64);
+            this.cboCategorias.Location = new System.Drawing.Point(489, 70);
             this.cboCategorias.Name = "cboCategorias";
             this.cboCategorias.Size = new System.Drawing.Size(164, 24);
             this.cboCategorias.TabIndex = 0;
@@ -46,7 +48,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(39, 67);
+            this.label1.Location = new System.Drawing.Point(392, 73);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(76, 17);
             this.label1.TabIndex = 1;
@@ -55,7 +57,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(392, 67);
+            this.label2.Location = new System.Drawing.Point(745, 73);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(130, 17);
             this.label2.TabIndex = 2;
@@ -64,16 +66,39 @@
             // cboTestCategorias
             // 
             this.cboTestCategorias.FormattingEnabled = true;
-            this.cboTestCategorias.Location = new System.Drawing.Point(547, 64);
+            this.cboTestCategorias.Location = new System.Drawing.Point(900, 70);
             this.cboTestCategorias.Name = "cboTestCategorias";
             this.cboTestCategorias.Size = new System.Drawing.Size(164, 24);
             this.cboTestCategorias.TabIndex = 3;
+            this.cboTestCategorias.SelectedIndexChanged += new System.EventHandler(this.cboTestCategorias_SelectedIndexChanged);
+            // 
+            // grbPreguntas
+            // 
+            this.grbPreguntas.Location = new System.Drawing.Point(267, 134);
+            this.grbPreguntas.Name = "grbPreguntas";
+            this.grbPreguntas.Size = new System.Drawing.Size(1073, 466);
+            this.grbPreguntas.TabIndex = 4;
+            this.grbPreguntas.TabStop = false;
+            this.grbPreguntas.Text = "Hacer Test";
+            // 
+            // btnHacerTest
+            // 
+            this.btnHacerTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHacerTest.Location = new System.Drawing.Point(534, 623);
+            this.btnHacerTest.Name = "btnHacerTest";
+            this.btnHacerTest.Size = new System.Drawing.Size(119, 43);
+            this.btnHacerTest.TabIndex = 5;
+            this.btnHacerTest.Text = "&Hacer Test";
+            this.btnHacerTest.UseVisualStyleBackColor = true;
+            this.btnHacerTest.Click += new System.EventHandler(this.btnHacerTest_Click);
             // 
             // FrmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1216, 552);
+            this.ClientSize = new System.Drawing.Size(1386, 678);
+            this.Controls.Add(this.btnHacerTest);
+            this.Controls.Add(this.grbPreguntas);
             this.Controls.Add(this.cboTestCategorias);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -81,6 +106,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "FrmPrincipal";
             this.Text = "Formulario Principal";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FrmPrincipal_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -93,6 +119,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cboTestCategorias;
+        private System.Windows.Forms.GroupBox grbPreguntas;
+        private System.Windows.Forms.Button btnHacerTest;
     }
 }
 

@@ -90,5 +90,29 @@ namespace CapaDatos
 
         }
 
+        public Test DevolverPreguntasTest (Test test, out string msg)
+        {
+            test.preguntasTest.Clear();
+
+            List<PreguntasRow> dsPreg = ds.Preguntas.Where(drPreg => drPreg.IdTest == test.idTest).ToList();
+
+            List<Pregunta> listPreguntas = (from dr in dsPreg
+                                            select new Pregunta(dr.IdPregunta, dr.Enunciado, dr.RespV, dr.IdTest)).ToList();
+
+            if (listPreguntas.Count == 0)
+            {
+                msg = "Este test no tiene preguntas";
+                return null;
+            }
+
+            foreach (var preg in listPreguntas)
+            {
+                test.preguntasTest.Add(preg);
+            }
+
+            msg = "";
+            return test;
+        }
+
     }
 }

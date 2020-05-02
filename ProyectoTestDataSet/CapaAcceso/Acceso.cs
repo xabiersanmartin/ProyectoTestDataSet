@@ -20,5 +20,10 @@ namespace CapaAcceso
         {
             return nuevoAcceso.DevolverTestsCategoria(categoria);
         }
+
+        public Test DevolverTestPreguntas (Test test, out string msg)
+        {
+            return nuevoAcceso.DevolverPreguntasTest(test, out msg);
+        }
     }
 }

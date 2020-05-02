@@ -9,7 +9,6 @@ namespace Entidades
     public class Pregunta : IEquatable<Pregunta>
     {
         public int idPregunta { get; set; }
-        public int numPregunta { get; set; }
         public string enunciado { get; set; }
         public bool respV { get; set; }
         public int idTest { get; set; }
@@ -23,10 +22,9 @@ namespace Entidades
             this.enunciado = enunciado;
         }
 
-        public Pregunta(int idPregunta, int numPregunta, string enunciado, bool respV, int idTest)
+        public Pregunta(int idPregunta, string enunciado, bool respV, int idTest)
         {
             this.idPregunta = idPregunta;
-            this.numPregunta = numPregunta;
             this.enunciado = enunciado;
             this.respV = respV;
             this.idTest = idTest;
