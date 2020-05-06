@@ -34,6 +34,7 @@
             this.cboTestCategorias = new System.Windows.Forms.ComboBox();
             this.grbPreguntas = new System.Windows.Forms.GroupBox();
             this.btnHacerTest = new System.Windows.Forms.Button();
+            this.btnCerrar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // cboCategorias
@@ -84,7 +85,7 @@
             // btnHacerTest
             // 
             this.btnHacerTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHacerTest.Location = new System.Drawing.Point(534, 623);
+            this.btnHacerTest.Location = new System.Drawing.Point(702, 624);
             this.btnHacerTest.Name = "btnHacerTest";
             this.btnHacerTest.Size = new System.Drawing.Size(119, 43);
             this.btnHacerTest.TabIndex = 5;
@@ -92,11 +93,23 @@
             this.btnHacerTest.UseVisualStyleBackColor = true;
             this.btnHacerTest.Click += new System.EventHandler(this.btnHacerTest_Click);
             // 
+            // btnCerrar
+            // 
+            this.btnCerrar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCerrar.Location = new System.Drawing.Point(12, 750);
+            this.btnCerrar.Name = "btnCerrar";
+            this.btnCerrar.Size = new System.Drawing.Size(119, 43);
+            this.btnCerrar.TabIndex = 7;
+            this.btnCerrar.Text = "&Cerrar";
+            this.btnCerrar.UseVisualStyleBackColor = true;
+            this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
+            // 
             // FrmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1386, 678);
+            this.ClientSize = new System.Drawing.Size(1386, 805);
+            this.Controls.Add(this.btnCerrar);
             this.Controls.Add(this.btnHacerTest);
             this.Controls.Add(this.grbPreguntas);
             this.Controls.Add(this.cboTestCategorias);
@@ -121,6 +134,7 @@
         private System.Windows.Forms.ComboBox cboTestCategorias;
         private System.Windows.Forms.GroupBox grbPreguntas;
         private System.Windows.Forms.Button btnHacerTest;
+        private System.Windows.Forms.Button btnCerrar;
     }
 }
 

@@ -37,8 +37,7 @@ namespace CapaDatos
         {
             if (ds == null)
             {
-                msg = "No se ha podido establecer conexión con la base de datos";
-
+                msg = "No se ha podido establecer conexión con la base de datos interna";
                 return null;
             }
 
@@ -61,29 +60,20 @@ namespace CapaDatos
 
         public Categoria DevolverTestsCategoria(Categoria categoria)
         {
-            categoria.testCategorias.Clear();
+            if (categoria.testCategorias.Count != 0)
+            {
+                categoria.testCategorias.Clear();
+            }
 
             List<CategoriasTestsRow> dsTestCat;
             dsTestCat = ds.CategoriasTests.Where(drCatTest => drCatTest.IdCategoria == categoria.idCategoria).ToList();
 
-            List<Test> listTestCat = (from dr in dsTestCat
-                                      select new Test(dr.IdTest)).ToList();
-
-            List<TestRow> dsTest;
-            dsTest = ds.Test.ToList();
-
-            List<Test> listTest = new List<Test>();
-
-            foreach (var test in listTestCat)
+            foreach (var test in dsTestCat)
             {
-                listTest = (from t in dsTest
-                            where t.IdTest == test.idTest
-                            select new Test(t.IdTest, t.Descripcion)).ToList();
-
-                foreach (var test2 in listTest)
-                {
-                    categoria.testCategorias.Add(test2);
-                }
+                Test newTest = new Test();
+                newTest.Descripcion = test.TestRow.Descripcion;
+                newTest.idTest = test.IdTest;
+                categoria.testCategorias.Add(newTest);
             }
 
             return categoria;
@@ -92,7 +82,10 @@ namespace CapaDatos
 
         public Test DevolverPreguntasTest(Test test, out string msg)
         {
-            test.preguntasTest.Clear();
+            if (test.preguntasTest.Count != 0)
+            {
+                test.preguntasTest.Clear();
+            }
 
             List<PreguntasRow> dsPreg = ds.Preguntas.Where(drPreg => drPreg.IdTest == test.idTest).ToList();
 

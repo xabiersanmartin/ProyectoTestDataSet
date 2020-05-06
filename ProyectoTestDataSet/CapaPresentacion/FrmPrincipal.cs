@@ -13,8 +13,6 @@ namespace CapaPresentacion
 {
     public partial class FrmPrincipal : Form
     {
-        string msg;
-
         List<TextBox> listText = new List<TextBox>();
         List<CheckBox> listCheck = new List<CheckBox>();
         List<PictureBox> listPicB = new List<PictureBox>();
@@ -27,7 +25,14 @@ namespace CapaPresentacion
 
         private void FrmPrincipal_Load(object sender, EventArgs e)
         {
+            string msg = "";
+
             List<Categoria> listCategoria = Program.gestor.DevolverCategorias(out msg);
+
+            if (msg != "")
+            {
+                MessageBox.Show(msg);
+            }
 
             if (listCategoria == null)
             {
@@ -65,7 +70,13 @@ namespace CapaPresentacion
             if (categoriaTests.testCategorias.Count == 0)
             {
                 MessageBox.Show("Esta categoria(" + categoriaTests.Descripcion + ") no tienes tests asociados.", "ATENCIÓN");
+                string msg = "";
                 List<Categoria> listCategoria = Program.gestor.DevolverCategorias(out msg);
+                if (msg != "")
+                {
+                    MessageBox.Show(msg);
+                    return;
+                }
                 cboCategorias.Items.Clear();
                 cboCategorias.Items.AddRange(listCategoria.ToArray());
                 cboCategorias.DisplayMember = "Descripcion";
@@ -83,14 +94,19 @@ namespace CapaPresentacion
 
         private void cboTestCategorias_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //Limpiamos la vaja de controles con las listas por si alguien cambia el combobox, que hace que carguen las preguntas, el el groupbox.
             grbPreguntas.Controls.Clear();
+            listText.Clear();
+            listCheck.Clear();
+            listPicB.Clear();
+            points.Clear();
 
             if (cboTestCategorias.SelectedIndex == -1)
             {
                 return;
             }
             Test testBuscar = cboTestCategorias.SelectedItem as Test;
-
+            string msg;
             Test testPreguntas = Program.gestor.DevolverTestPreguntas(testBuscar,out msg);
 
             if (msg != "")
@@ -142,8 +158,13 @@ namespace CapaPresentacion
             int contador = 0;
 
             Test testBuscar = cboTestCategorias.SelectedItem as Test;
+            string msg;
             Test testPreguntas = Program.gestor.DevolverTestPreguntas(testBuscar, out msg);
-
+            if (msg != "")
+            {
+                MessageBox.Show(msg);
+                return;
+            }
             foreach (var checkB in listCheck)
             {
                 comprobarTest.Add(checkB.Checked);
@@ -195,6 +216,13 @@ namespace CapaPresentacion
             }
 
             btnHacerTest.Enabled = false;
+            contador = 0;
         }
+
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
     }
 }
