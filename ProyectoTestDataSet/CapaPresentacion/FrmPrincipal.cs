@@ -32,14 +32,10 @@ namespace CapaPresentacion
             if (msg != "")
             {
                 MessageBox.Show(msg);
-            }
-
-            if (listCategoria == null)
-            {
-                MessageBox.Show(msg);
                 cboCategorias.Enabled = false;
                 return;
             }
+
             else
             {
                 cboCategorias.Items.Clear();
