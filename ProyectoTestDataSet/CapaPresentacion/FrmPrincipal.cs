@@ -59,7 +59,7 @@ namespace CapaPresentacion
 
             if (cboCategorias.SelectedIndex == -1)
             {
-                MessageBox.Show("Debe estar seleccionada una categoria para cargar sus tests", "ATENCIÓN");
+                MessageBox.Show("Debe estar seleccionada una categoría para cargar sus tests", "ATENCIÓN");
                 return;
             }
 
@@ -69,7 +69,7 @@ namespace CapaPresentacion
 
             if (categoriaTests.testCategorias.Count == 0)
             {
-                MessageBox.Show("Esta categoria(" + categoriaTests.Descripcion + ") no tienes tests asociados.", "ATENCIÓN");
+                MessageBox.Show("Esta categoría(" + categoriaTests.Descripcion + ") no tienes tests asociados.", "ATENCIÓN");
                 string msg = "";
                 List<Categoria> listCategoria = Program.gestor.DevolverCategorias(out msg);
                 if (msg != "")
@@ -94,7 +94,7 @@ namespace CapaPresentacion
 
         private void cboTestCategorias_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //Limpiamos la vaja de controles con las listas por si alguien cambia el combobox, que hace que carguen las preguntas, el el groupbox.
+            //Limpiamos la caja de controles con las listas por si alguien cambia el combobox, que hace que carguen las preguntas, el el groupbox.
             grbPreguntas.Controls.Clear();
             listText.Clear();
             listCheck.Clear();

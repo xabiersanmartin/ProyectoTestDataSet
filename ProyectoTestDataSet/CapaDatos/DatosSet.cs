@@ -50,7 +50,7 @@ namespace CapaDatos
 
             if (listCategorias.Count == 0)
             {
-                msg = "No hay categorias que mostrar";
+                msg = "No hay categorías que mostrar";
                 return null;
             }
 
