@@ -10,7 +10,7 @@ namespace CapaAcceso
 {
     public class Acceso
     {
-        DatosSet nuevoAcceso = new DatosSet();
+        DatosSet nuevoAcceso = new DatosSet(out string msg);
         public List<Categoria> DevolverCategorias(out string msg)
         {
             return nuevoAcceso.DevolverCategorias(out msg);

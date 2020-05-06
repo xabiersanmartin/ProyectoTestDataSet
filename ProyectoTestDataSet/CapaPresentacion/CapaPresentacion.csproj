@@ -84,6 +84,10 @@
       <Project>{8493F95E-3BF7-4F3D-BD78-2B0C38A07F5B}</Project>
       <Name>CapaNegocio</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CapaDatos\CapaDatos.csproj">
+      <Project>{89D3C8FC-E7D8-40A5-BD3D-1259117259F4}</Project>
+      <Name>CapaDatos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Entidades\Entidades.csproj">
       <Project>{882FF1A6-1904-4D40-B9FE-A1ADFDD61E2A}</Project>
       <Name>Entidades</Name>

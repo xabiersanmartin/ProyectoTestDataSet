@@ -1,4 +1,5 @@
 ﻿using CapaAcceso;
+using CapaDatos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace CapaPresentacion
     static class Program
     {
         public static Acceso gestor = new Acceso();
+        public static DatosSet datos;
         /// <summary>
         /// Punto de entrada principal para la aplicación.
         /// </summary>
@@ -18,7 +20,16 @@ namespace CapaPresentacion
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            string msg = "";
+            datos = new DatosSet(out msg);
+            if (msg != "")
+            {
+                MessageBox.Show(msg);
+                return;
+            }
             Application.Run(new FrmPrincipal());
         }
+        
     }
 }

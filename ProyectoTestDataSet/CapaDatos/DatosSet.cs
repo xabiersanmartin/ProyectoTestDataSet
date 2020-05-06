@@ -17,19 +17,19 @@ namespace CapaDatos
         TestTableAdapter dsTests = new TestTableAdapter();
         CategoriasTestsTableAdapter dsCategoriasTests = new CategoriasTestsTableAdapter();
 
-        public DatosSet()
+        public DatosSet(out string msg)
         {
             try
             {
+                msg = "";
                 dsCategorias.Fill(ds.Categorias);
                 dsTests.Fill(ds.Test);
                 dsPreguntas.Fill(ds.Preguntas);
                 dsCategoriasTests.Fill(ds.CategoriasTests);
-
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                msg = "No se ha podido conectar con la base de datos, mensaje de error: " + ex.Message;
             }
         }
 
@@ -90,7 +90,7 @@ namespace CapaDatos
 
         }
 
-        public Test DevolverPreguntasTest (Test test, out string msg)
+        public Test DevolverPreguntasTest(Test test, out string msg)
         {
             test.preguntasTest.Clear();
 
