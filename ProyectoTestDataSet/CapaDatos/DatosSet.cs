@@ -58,53 +58,110 @@ namespace CapaDatos
             return listCategorias;
         }
 
-        public Categoria DevolverTestsCategoria(Categoria categoria)
+        public Categoria DevolverTestsCategoria(int idCategoria, out string msg) 
         {
-            if (categoria.testCategorias.Count != 0)
+            CategoriasRow drCategoria = ds.Categorias.FindByIdCategoria(idCategoria);
+
+            if (drCategoria == null)
             {
-                categoria.testCategorias.Clear();
+                msg = "No existe la categoría";
+                return null;
             }
 
-            List<CategoriasTestsRow> dsTestCat;
-            dsTestCat = ds.CategoriasTests.Where(drCatTest => drCatTest.IdCategoria == categoria.idCategoria).ToList();
+            List<CategoriasTestsRow> drCategoriasTest = drCategoria.GetCategoriasTestsRows().ToList();
 
-            foreach (var test in dsTestCat)
+            var listTest = (from drcatTest in drCategoriasTest
+                            select new Test(drcatTest.IdTest, drcatTest.TestRow.Descripcion)).ToList();
+
+            if (listTest.Count == 0)
             {
-                Test newTest = new Test();
-                newTest.Descripcion = test.TestRow.Descripcion;
-                newTest.idTest = test.IdTest;
-                categoria.testCategorias.Add(newTest);
+                msg = "Esta categoría no tiene tests";
+                return null;
             }
 
-            return categoria;
+            foreach (var test in listTest)
+            {
+                TestRow drTest = ds.Test.FindByIdTest(test.idTest);
+
+                List<PreguntasRow> drPreguntas = drTest.GetPreguntasRows().ToList();
+
+                List<Pregunta> listPreguntas = (from drPregunta in drPreguntas
+                                                select new Pregunta(drPregunta.IdPregunta, drPregunta.Enunciado, drPregunta.RespV)).ToList();
+                if (listPreguntas.Count != 0)
+                {
+                    foreach (var pregunta in listPreguntas)
+                    {
+                        test.preguntasTest.Add(pregunta);
+                    }
+                } 
+            }
+
+            Categoria nuevaCategoria = new Categoria(drCategoria.IdCategoria, drCategoria.Descripcion, listTest);
+
+            msg = "";
+            return nuevaCategoria;
+
+        }
+        //Igual que la anterior función pero mas resumida y hecha de otra forma
+        public Categoria DevolverTestsCategoria2(int idCategoria, out string msg)
+        {
+            CategoriasRow drCategoria = ds.Categorias.FindByIdCategoria(idCategoria);
+
+            if (drCategoria == null)
+            {
+                msg = "No existe la categoría";
+                return null;
+            }
+
+            List<CategoriasTestsRow> drCategoriasTest = drCategoria.GetCategoriasTestsRows().ToList();
+            if(drCategoriasTest.Count == 0)
+            {
+                msg = "Esta categoría no tiene tests";
+                return null;
+            }
+
+            var listTest = (from drcatTest in drCategoriasTest
+                            select new Test(drcatTest.IdTest, drcatTest.TestRow.Descripcion, (from drPregunta in drcatTest.TestRow.GetPreguntasRows()
+                                                                                              select new Pregunta(drPregunta.IdPregunta, drPregunta.Enunciado, drPregunta.RespV)).ToList())).ToList();
+
+
+            Categoria nuevaCategoria = new Categoria(drCategoria.IdCategoria, drCategoria.Descripcion, listTest);
+
+            msg = "";
+            return nuevaCategoria;
 
         }
 
-        public Test DevolverPreguntasTest(Test test, out string msg)
+        public Test DevolverPreguntasTest(int idTest, out string msg)
         {
-            if (test.preguntasTest.Count != 0)
+            TestRow drTest = ds.Test.FindByIdTest(idTest);
+
+            if (drTest == null)
             {
-                test.preguntasTest.Clear();
+                msg = "No existe el test";
+                return null;
             }
 
-            List<PreguntasRow> dsPreg = ds.Preguntas.Where(drPreg => drPreg.IdTest == test.idTest).ToList();
+            Test nuevoTest = new Test(idTest);
 
-            List<Pregunta> listPreguntas = (from dr in dsPreg
-                                            select new Pregunta(dr.IdPregunta, dr.Enunciado, dr.RespV, dr.IdTest)).ToList();
+            List<PreguntasRow> drPregunta = drTest.GetPreguntasRows().ToList();
+
+            List<Pregunta> listPreguntas = (from drpregunta in drPregunta
+                                            select new Pregunta(drpregunta.IdPregunta, drpregunta.Enunciado, drpregunta.RespV)).ToList();
 
             if (listPreguntas.Count == 0)
             {
                 msg = "Este test no tiene preguntas";
                 return null;
             }
-
-            foreach (var preg in listPreguntas)
+            
+            foreach (var pregunta in listPreguntas)
             {
-                test.preguntasTest.Add(preg);
+                nuevoTest.preguntasTest.Add(pregunta);
             }
 
             msg = "";
-            return test;
+            return nuevoTest;
         }
 
     }

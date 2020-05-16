@@ -60,8 +60,16 @@ namespace CapaPresentacion
             }
 
             Categoria newCategoria = cboCategorias.SelectedItem as Categoria;
+            string msg2 = "";
 
-            Categoria categoriaTests = Program.gestor.DevolverCategoriaTests(newCategoria);
+            Categoria categoriaTests = Program.gestor.DevolverCategoriaTests(newCategoria.idCategoria, out msg2);
+            if (msg2 != "")
+            {
+                MessageBox.Show(msg2);
+                cboCategorias.SelectedIndex = -1;
+                cboCategorias.Text = "";
+                return;
+            }
 
             if (categoriaTests.testCategorias.Count == 0)
             {
@@ -102,27 +110,27 @@ namespace CapaPresentacion
                 return;
             }
             Test testBuscar = cboTestCategorias.SelectedItem as Test;
-            string msg;
-            Test testPreguntas = Program.gestor.DevolverTestPreguntas(testBuscar,out msg);
+            //string msg;
+            //Test testPreguntas = Program.gestor.DevolverTestPreguntas(testBuscar.idTest,out msg);
 
-            if (msg != "")
-            {
-                MessageBox.Show(msg,"ATENCIÓN");
-                cboTestCategorias.SelectedIndex = -1;
-                btnHacerTest.Enabled = false;
-                return;
-            }
+            //if (msg != "")
+            //{
+            //    MessageBox.Show(msg,"ATENCIÓN");
+            //    cboTestCategorias.SelectedIndex = -1;
+            //    btnHacerTest.Enabled = false;
+            //    return;
+            //}
 
             int columna = 180;
             int columna2 = 660;
             int fila = 50;
 
-            for (int i = 0; i < testPreguntas.preguntasTest.Count; i++)
+            for (int i = 0; i < testBuscar.preguntasTest.Count; i++)
             {
                 TextBox newText = new TextBox();
                 CheckBox newCheck = new CheckBox();
 
-                newText.Text = testPreguntas.preguntasTest[i].enunciado;
+                newText.Text = testBuscar.preguntasTest[i].enunciado;
                 newText.Location = new Point(columna, fila);
                 newText.Width = 450;
                 newText.Height = 120;
@@ -152,15 +160,15 @@ namespace CapaPresentacion
         {
             List<bool> comprobarTest = new List<bool>();
             int contador = 0;
-
             Test testBuscar = cboTestCategorias.SelectedItem as Test;
-            string msg;
-            Test testPreguntas = Program.gestor.DevolverTestPreguntas(testBuscar, out msg);
-            if (msg != "")
-            {
-                MessageBox.Show(msg);
-                return;
-            }
+
+            //string msg;
+            //Test testPreguntas = Program.gestor.DevolverTestPreguntas(testBuscar.idTest, out msg);
+            //if (msg != "")
+            //{
+            //    MessageBox.Show(msg);
+            //    return;
+            //}
             foreach (var checkB in listCheck)
             {
                 comprobarTest.Add(checkB.Checked);

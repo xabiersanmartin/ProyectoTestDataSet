@@ -16,14 +16,14 @@ namespace CapaAcceso
             return nuevoAcceso.DevolverCategorias(out msg);
         }
 
-        public Categoria DevolverCategoriaTests(Categoria categoria)
+        public Categoria DevolverCategoriaTests(int idCategoria, out string msg)
         {
-            return nuevoAcceso.DevolverTestsCategoria(categoria);
+            return nuevoAcceso.DevolverTestsCategoria(idCategoria, out msg);
         }
 
-        public Test DevolverTestPreguntas (Test test, out string msg)
+        public Test DevolverTestPreguntas (int idTest, out string msg)
         {
-            return nuevoAcceso.DevolverPreguntasTest(test, out msg);
+            return nuevoAcceso.DevolverPreguntasTest(idTest, out msg);
         }
     }
 }
