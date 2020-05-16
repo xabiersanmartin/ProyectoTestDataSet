@@ -110,16 +110,6 @@ namespace CapaPresentacion
                 return;
             }
             Test testBuscar = cboTestCategorias.SelectedItem as Test;
-            //string msg;
-            //Test testPreguntas = Program.gestor.DevolverTestPreguntas(testBuscar.idTest,out msg);
-
-            //if (msg != "")
-            //{
-            //    MessageBox.Show(msg,"ATENCIÓN");
-            //    cboTestCategorias.SelectedIndex = -1;
-            //    btnHacerTest.Enabled = false;
-            //    return;
-            //}
 
             int columna = 180;
             int columna2 = 660;
@@ -162,13 +152,6 @@ namespace CapaPresentacion
             int contador = 0;
             Test testBuscar = cboTestCategorias.SelectedItem as Test;
 
-            //string msg;
-            //Test testPreguntas = Program.gestor.DevolverTestPreguntas(testBuscar.idTest, out msg);
-            //if (msg != "")
-            //{
-            //    MessageBox.Show(msg);
-            //    return;
-            //}
             foreach (var checkB in listCheck)
             {
                 comprobarTest.Add(checkB.Checked);
