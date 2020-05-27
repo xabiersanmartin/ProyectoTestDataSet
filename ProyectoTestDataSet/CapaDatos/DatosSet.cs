@@ -12,20 +12,20 @@ namespace CapaDatos
     public class DatosSet
     {
         DataSetTest ds = new DataSetTest();
-        CategoriasTableAdapter dsCategorias = new CategoriasTableAdapter();
-        PreguntasTableAdapter dsPreguntas = new PreguntasTableAdapter();
-        TestTableAdapter dsTests = new TestTableAdapter();
-        CategoriasTestsTableAdapter dsCategoriasTests = new CategoriasTestsTableAdapter();
+        CategoriasTableAdapter dtCategorias = new CategoriasTableAdapter();
+        PreguntasTableAdapter dtPreguntas = new PreguntasTableAdapter();
+        TestTableAdapter dtTests = new TestTableAdapter();
+        CategoriasTestsTableAdapter dtCategoriasTests = new CategoriasTestsTableAdapter();
 
         public DatosSet(out string msg)
         {
             try
             {
                 msg = "";
-                dsCategorias.Fill(ds.Categorias);
-                dsTests.Fill(ds.Test);
-                dsPreguntas.Fill(ds.Preguntas);
-                dsCategoriasTests.Fill(ds.CategoriasTests);
+                dtCategorias.Fill(ds.Categorias);
+                dtTests.Fill(ds.Test);
+                dtPreguntas.Fill(ds.Preguntas);
+                dtCategoriasTests.Fill(ds.CategoriasTests);
             }
             catch (Exception ex)
             {
@@ -35,9 +35,9 @@ namespace CapaDatos
 
         public List<Categoria> DevolverCategorias(out string msg)
         {
-            if (ds == null)
+            if (dtCategorias == null)
             {
-                msg = "No se ha podido establecer conexión con la base de datos interna";
+                msg = "No hay caregorías";
                 return null;
             }
 
@@ -102,7 +102,7 @@ namespace CapaDatos
             return nuevaCategoria;
 
         }
-        //Igual que la anterior función pero mas resumida y hecha de otra forma
+        //Igual que la anterior función pero mas resumida y hecha de otra forma sin un for each
         public Categoria DevolverTestsCategoria2(int idCategoria, out string msg)
         {
             CategoriasRow drCategoria = ds.Categorias.FindByIdCategoria(idCategoria);
@@ -144,9 +144,9 @@ namespace CapaDatos
 
             Test nuevoTest = new Test(idTest);
 
-            List<PreguntasRow> drPregunta = drTest.GetPreguntasRows().ToList();
-
-            List<Pregunta> listPreguntas = (from drpregunta in drPregunta
+            List<PreguntasRow> drPreguntas = drTest.GetPreguntasRows().ToList();
+            
+            List<Pregunta> listPreguntas = (from drpregunta in drPreguntas
                                             select new Pregunta(drpregunta.IdPregunta, drpregunta.Enunciado, drpregunta.RespV)).ToList();
 
             if (listPreguntas.Count == 0)
@@ -154,11 +154,12 @@ namespace CapaDatos
                 msg = "Este test no tiene preguntas";
                 return null;
             }
-            
-            foreach (var pregunta in listPreguntas)
-            {
-                nuevoTest.preguntasTest.Add(pregunta);
-            }
+
+            //foreach (var pregunta in listPreguntas)
+            //{
+            //    nuevoTest.preguntasTest.Add(pregunta);
+            //}
+            nuevoTest.preguntasTest = listPreguntas;
 
             msg = "";
             return nuevoTest;
