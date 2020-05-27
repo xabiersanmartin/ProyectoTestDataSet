@@ -41,10 +41,7 @@ namespace CapaDatos
                 return null;
             }
 
-            List<CategoriasRow> dsCategoria;
-            dsCategoria = ds.Categorias.ToList();
-
-            List<Categoria> listCategorias = (from dr in dsCategoria
+            List<Categoria> listCategorias = (from dr in ds.Categorias
                                               orderby dr.Descripcion ascending
                                               select new Categoria(dr.IdCategoria, dr.Descripcion)).ToList();
 
@@ -102,6 +99,7 @@ namespace CapaDatos
             return nuevaCategoria;
 
         }
+
         //Igual que la anterior función pero mas resumida y hecha de otra forma sin un for each
         public Categoria DevolverTestsCategoria2(int idCategoria, out string msg)
         {
